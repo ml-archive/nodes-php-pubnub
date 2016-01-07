@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nodes\\Service\\Pubnub": "src"
+            "Nodes\\Service\\Pubnub\\": "src"
         }
     },
     "minimum-stability": "stable"
