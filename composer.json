@@ -26,6 +26,5 @@
         "psr-4": {
             "Nodes\\Service\\Pubnub\\": "src"
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
