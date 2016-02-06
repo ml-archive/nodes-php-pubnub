@@ -1,7 +1,7 @@
 <?php
 namespace Nodes\Services\Pubnub;
 
-use Nodes\AbstractServiceProvider as NodesAbstractServiceProvider;
+use Nodes\AbstractServiceProvider;
 use Nodes\Services\Pubnub\Broadcasting\Broadcaster;
 use Pubnub\Pubnub;
 
@@ -10,8 +10,33 @@ use Pubnub\Pubnub;
  *
  * @package Nodes\Services\Pubnub
  */
-class ServiceProvider extends NodesAbstractServiceProvider
+class ServiceProvider extends AbstractServiceProvider
 {
+    /**
+     * Package name
+     *
+     * @var string|null
+     */
+    protected $package = 'pubnub';
+
+    /**
+     * Facades to install
+     *
+     * @var array
+     */
+    protected $facades = [
+        'NodesPubnub' => \Nodes\Services\Pubnub\Support\Facades\Pubnub::class
+    ];
+
+    /**
+     * Array of configs to copy
+     *
+     * @var array
+     */
+    protected $configs = [
+        'config/pubnub.php' => 'config/nodes/services/pubnub.php'
+    ];
+
     /**
      * Bootstrap the application service
      *
@@ -38,6 +63,7 @@ class ServiceProvider extends NodesAbstractServiceProvider
     public function register()
     {
         parent::register();
+
         $this->registerPubnub();
     }
 
