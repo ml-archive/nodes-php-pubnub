@@ -13,7 +13,7 @@ Broadcast events with [PubNub](http://pubnub.com) from your application
 
 ## 📝 Introduction
 
-Integrates the PubNub](http://pubnub.com) service, which makes it unbelieable easy to send broadcast events from your application.
+Integrates the [PubNub](http://pubnub.com) service, which makes it unbelieable easy to send broadcast events from your application.
 
 ## 📦 Installation
 
@@ -73,7 +73,7 @@ Open the `config/broadcasing.php` file and the following array to the array of `
 ],
 ```
 
-Add your PubNub application credentials to your `.env` file:
+Add your [PubNub](http://pubnub.com) application credentials to your `.env` file:
 
 ```
 BROADCAST_DRIVER=pubnub
