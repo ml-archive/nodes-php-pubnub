@@ -1,7 +1,7 @@
 <?php
 namespace Nodes\Services\Pubnub;
 
-use Nodes\AbstractServiceProvider;
+use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
 use Nodes\Services\Pubnub\Broadcasting\Broadcaster;
 use Pubnub\Pubnub;
 
@@ -10,33 +10,8 @@ use Pubnub\Pubnub;
  *
  * @package Nodes\Services\Pubnub
  */
-class ServiceProvider extends AbstractServiceProvider
+class ServiceProvider extends IlluminateServiceProvider
 {
-    /**
-     * Package name
-     *
-     * @var string|null
-     */
-    protected $package = 'pubnub';
-
-    /**
-     * Facades to install
-     *
-     * @var array
-     */
-    protected $facades = [
-        'NodesPubnub' => \Nodes\Services\Pubnub\Support\Facades\Pubnub::class
-    ];
-
-    /**
-     * Array of configs to copy
-     *
-     * @var array
-     */
-    protected $configs = [
-        'config/pubnub.php' => 'config/nodes/services/pubnub.php'
-    ];
-
     /**
      * Bootstrap the application service
      *
@@ -47,6 +22,12 @@ class ServiceProvider extends AbstractServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
+        // Register publish groups
+        $this->publishGroups();
+
+        // Add PubNub to broadcast manager
         app('Illuminate\Broadcasting\BroadcastManager')->extend('pubnub', function($app) {
             return new Broadcaster($app['nodes.services.pubnub']);
         });
@@ -62,9 +43,23 @@ class ServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        parent::register();
-
         $this->registerPubnub();
+    }
+
+    /**
+     * Register publish groups
+     *
+     * @author Morten Rugaard <moru@nodes.dk>
+     *
+     * @access protected
+     * @return void
+     */
+    protected function publishGroups()
+    {
+        // Config files
+        $this->publishes([
+            __DIR__ . '/../config/pubnub.php' => config_path('nodes/services/pubnub.php'),
+        ], 'config');
     }
 
     /**
