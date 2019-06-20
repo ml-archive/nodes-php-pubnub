@@ -1,5 +1,7 @@
 ## PubNub
 
+⚠️**This package is deprecated**⚠️
+
 Broadcast events with [PubNub](http://pubnub.com) from your application
 
 [![Total downloads](https://img.shields.io/packagist/dt/nodes/pubnub.svg)](https://packagist.org/packages/nodes/pubnub)
